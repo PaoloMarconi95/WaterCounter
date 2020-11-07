@@ -1,22 +1,3 @@
-def main():
-    test0 = [2, 0, 1]  # 1
-    test1 = [1, 2, 1, 1, 0, 0, 3, 2, 5, 4, 5, 3]  # 8
-    test2 = [0, 0, 0, 2, 0, 2]  # 2
-    test3 = [3, 1, 7]  # 2
-    test4 = [4, 3, 2, 1, 0, 1, 2]  # 4
-    test5 = [1, 3, 1, 0, 6, 2, 0, 1]  # 6
-    test6 = [3, 1, 1, 1, 2, 3]  # 7
-    test7 = [1, 1, 0, 0, -1, 0]  # 1
-    print("test 0 =  " + str(count(test0)))
-    print("test 1 =  " + str(count(test1)))
-    print("test 2 =  " + str(count(test2)))
-    print("test 3 =  " + str(count(test3)))
-    print("test 4 =  " + str(count(test4)))
-    print("test 5 =  " + str(count(test5)))
-    print("test 6 =  " + str(count(test6)))
-    print("test 7 =  " + str(count(test7)))
-
-
 def count(arr):
     total = 0
     if len(arr) < 2:
@@ -91,5 +72,3 @@ def estimate(arr, i, i_max):
     for x in interval:
         tot = tot + (lim_sup - arr[x])
     return tot
-
-main()
