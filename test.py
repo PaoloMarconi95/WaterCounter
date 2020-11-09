@@ -25,8 +25,8 @@ class MyTest(unittest.TestCase):
         self.assertEqual(main.count(arr3), 6)
 
     def test_negative(self):
-        arr = [1, 1, 0, 0, -1, 0]
-        self.assertEqual(main.count(arr), 1)
+        arr = [1, -2, 1]
+        self.assertEqual(main.count(arr), 3)
 
 
 unittest.main()

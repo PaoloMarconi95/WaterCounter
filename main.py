@@ -1,4 +1,11 @@
 def count(arr):
+    if control_input(arr):
+        return count_water(arr)
+    else:
+        print("Error")
+
+
+def count_water(arr):
     total = 0
     if len(arr) < 2:
         return 0
@@ -72,3 +79,18 @@ def estimate(arr, i, i_max):
     for x in interval:
         tot = tot + (lim_sup - arr[x])
     return tot
+
+def control_input(arr):
+    controlled = False
+    if arr is None:
+        print("None Array passed")
+    else:
+        if any(x < 0 for x in arr):
+            make_every_positive(arr)
+        controlled = True
+    return controlled
+
+def make_every_positive(arr):
+    min_value = min(arr)
+    for i in range(0, len(arr)):
+        arr[i] = arr[i] + (-min_value)

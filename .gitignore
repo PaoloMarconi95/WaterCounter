@@ -279,6 +279,9 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# My try file
+prova.py
+
 # Environments
 .env
 .venv
