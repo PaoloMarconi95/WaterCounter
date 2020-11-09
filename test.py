@@ -11,6 +11,8 @@ class MyTest(unittest.TestCase):
         self.assertEqual(main.count(arr2), 0)
         arr3 = [0, 0, 0, 2, 0, 2]
         self.assertEqual(main.count(arr3), 2)
+        arr4 = [3, 0, 1, 1, 2]
+        self.assertEqual(main.count(arr4), 4)
 
     def test_backwards(self):
         arr = [3, 1, 7]
@@ -27,6 +29,8 @@ class MyTest(unittest.TestCase):
     def test_negative(self):
         arr = [1, -2, 1]
         self.assertEqual(main.count(arr), 3)
+        arr2 = [2, -4, 0, 0, 1, -3, -3, -3, 1]
+        self.assertEqual(main.count(arr2), 19)
 
 
 unittest.main()

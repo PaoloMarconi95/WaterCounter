@@ -65,6 +65,8 @@ def next_big_at(arr, i):
                 maximum = arr[x]
                 ind = x
                 found = True
+            elif arr[x] > arr[i]:
+                ind = x
             x = x + 1
     return ind
 
@@ -73,12 +75,13 @@ def estimate(arr, i, i_max):
     tot = 0
     lim_sup = min(arr[i], arr[i_max])
     if i < i_max:
-        interval = range(i, i_max)
+        interval = range(i + 1, i_max)
     else:
         interval = range(i_max + 1, i)
     for x in interval:
         tot = tot + (lim_sup - arr[x])
     return tot
+
 
 def control_input(arr):
     controlled = False
@@ -89,6 +92,7 @@ def control_input(arr):
             make_every_positive(arr)
         controlled = True
     return controlled
+
 
 def make_every_positive(arr):
     min_value = min(arr)
