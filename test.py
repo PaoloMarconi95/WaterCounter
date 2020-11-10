@@ -17,6 +17,8 @@ class MyTest(unittest.TestCase):
     def test_backwards(self):
         arr = [3, 1, 7]
         self.assertEqual(main.count(arr), 2)
+        arr2 = [1, 2, 3, 0, 2, 1, 2, 0, 1, 5, 2, 0]
+        self.assertEqual(main.count(arr2), 12)
 
     def test_complete(self):
         arr = [1, 2, 1, 1, 0, 0, 3, 2, 5, 4, 5, 3]
@@ -31,6 +33,8 @@ class MyTest(unittest.TestCase):
         self.assertEqual(main.count(arr), 3)
         arr2 = [2, -4, 0, 0, 1, -3, -3, -3, 1]
         self.assertEqual(main.count(arr2), 19)
+        arr3 = [3, 0, 0, -1, 0, 0, 1, 1, 2, 1, 0, 0, -1, 0, 3]
+        self.assertEqual(main.count(arr3), 36)
 
 
 unittest.main()

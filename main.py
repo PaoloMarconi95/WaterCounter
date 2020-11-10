@@ -1,11 +1,15 @@
-def count(arr):
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def count(arr, plotting=False):
     if control_input(arr):
-        return count_water(arr)
+        return count_water(arr, plotting)
     else:
         print("Error")
 
 
-def count_water(arr):
+def count_water(arr, plotting):
     total = 0
     if len(arr) < 2:
         return 0
@@ -18,7 +22,7 @@ def count_water(arr):
             if arr[i] < prev:
                 i_max = next_big_at(arr, i)
                 if i_max != -1:
-                    total = total + estimate(arr, i - 1, i_max)
+                    total = total + estimate(arr, i - 1, i_max, plotting)
                     # since there's always an increment of i at the end,
                     # Placing i equal to i_max will make the next iteration to ignore
                     # the interval just considered
@@ -29,7 +33,7 @@ def count_water(arr):
                 # where's the
                 i_max = prev_max_at(arr, i)
                 if i_max != -1:
-                    total = total + estimate(arr, i, i_max)
+                    total = total + estimate(arr, i, i_max, plotting)
                     # No skipping to any other index
             i = i + 1
     return total
@@ -71,7 +75,10 @@ def next_big_at(arr, i):
     return ind
 
 
-def estimate(arr, i, i_max):
+def estimate(arr, i, i_max, plotting):
+    # baseline for plotting
+    if plotting:
+        base = np.zeros(len(arr))
     tot = 0
     lim_sup = min(arr[i], arr[i_max])
     if i < i_max:
@@ -80,7 +87,19 @@ def estimate(arr, i, i_max):
         interval = range(i_max + 1, i)
     for x in interval:
         tot = tot + (lim_sup - arr[x])
+        if plotting:
+            base[x] = (lim_sup - arr[x])
+    if plotting:
+        plot_res(arr, base)
     return tot
+
+
+def plot_res(arr, base):
+    xaxe = np.arange(len(arr))
+    plt.bar(xaxe, arr)
+    plt.axis([-1, len(arr), 0, max(arr) + 2])
+    plt.bar(xaxe, base, bottom=arr, color="red")
+    plt.show()
 
 
 def control_input(arr):
