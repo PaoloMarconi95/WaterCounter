@@ -14,6 +14,14 @@ class MyTest(unittest.TestCase):
         arr4 = [3, 0, 1, 1, 2]
         self.assertEqual(main.count(arr4), 4)
 
+    def test_decrescent(self):
+        arr = [4, 3, 2, 1, 0]
+        self.assertEqual(main.count(arr), 0)
+
+    def test_null(self):
+        arr = None
+        self.assertEqual(main.count(arr), None)
+
     def test_backwards(self):
         arr = [3, 1, 7]
         self.assertEqual(main.count(arr), 2)

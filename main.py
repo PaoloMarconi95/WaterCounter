@@ -6,11 +6,12 @@ def count(arr, plotting=False):
     if control_input(arr):
         return count_water(arr, plotting)
     else:
-        print("Error")
+        return None
 
 
 def count_water(arr, plotting):
     total = 0
+    found = np.zeros(len(arr))
     if len(arr) < 2:
         return 0
     else:
@@ -21,8 +22,10 @@ def count_water(arr, plotting):
             # look for possible inlet after the current index
             if arr[i] < prev:
                 i_max = next_big_at(arr, i)
-                if i_max != -1:
-                    total = total + estimate(arr, i - 1, i_max, plotting)
+                if i_max != -1 :
+                    total_t, found_t = estimate(arr, i - 1, i_max, plotting)
+                    found = np.add(found, found_t)
+                    total = total_t + total
                     # since there's always an increment of i at the end,
                     # Placing i equal to i_max will make the next iteration to ignore
                     # the interval just considered
@@ -32,10 +35,14 @@ def count_water(arr, plotting):
             elif arr[i] > prev:
                 # where's the
                 i_max = prev_max_at(arr, i)
-                if i_max != -1:
-                    total = total + estimate(arr, i, i_max, plotting)
+                if i_max != -1 :
+                    total_t, found_t = estimate(arr, i, i_max, plotting)
+                    found = np.add(found, found_t)
+                    total = total_t + total
                     # No skipping to any other index
             i = i + 1
+    if plotting:
+        plot_res(arr, found)
     return total
 
 
@@ -57,6 +64,7 @@ def prev_max_at(arr, i):
 
 
 def next_big_at(arr, i):
+    max_t = 0
     ind = -1
     maximum = arr[i - 1]
     found = False
@@ -70,15 +78,16 @@ def next_big_at(arr, i):
                 ind = x
                 found = True
             elif arr[x] > arr[i]:
-                ind = x
+                if arr[x] > max_t:
+                    max_t = arr[x]
+                    ind = x
             x = x + 1
     return ind
 
 
 def estimate(arr, i, i_max, plotting):
     # baseline for plotting
-    if plotting:
-        base = np.zeros(len(arr))
+    base = np.zeros(len(arr))
     tot = 0
     lim_sup = min(arr[i], arr[i_max])
     if i < i_max:
@@ -89,16 +98,17 @@ def estimate(arr, i, i_max, plotting):
         tot = tot + (lim_sup - arr[x])
         if plotting:
             base[x] = (lim_sup - arr[x])
-    if plotting:
-        plot_res(arr, base)
-    return tot
+    return tot, base
 
 
 def plot_res(arr, base):
     xaxe = np.arange(len(arr))
-    plt.bar(xaxe, arr)
-    plt.axis([-1, len(arr), 0, max(arr) + 2])
-    plt.bar(xaxe, base, bottom=arr, color="red")
+    fig, (x1, x2) = plt.subplots(2)
+    x1.bar(xaxe, arr)
+    x1.axis([-1, len(arr), 0, max(arr) + 2])
+    x1.bar(xaxe, base, bottom=arr, color="red")
+    x2.bar(xaxe, arr)
+    x2.axis([-1, len(arr), 0, max(arr) + 2])
     plt.show()
 
 
