@@ -35,14 +35,14 @@ def count_water(arr, plotting):
             elif arr[i] > prev:
                 # where's the
                 i_max = prev_max_at(arr, i)
-                if i_max != -1 :
+                if i_max != -1:
                     total_t, found_t = estimate(arr, i, i_max, plotting)
                     found = np.add(found, found_t)
                     total = total_t + total
                     # No skipping to any other index
             i = i + 1
     if plotting:
-        plot_res(arr, found)
+        plot_res(arr, found, total)
     return total
 
 
@@ -101,14 +101,15 @@ def estimate(arr, i, i_max, plotting):
     return tot, base
 
 
-def plot_res(arr, base):
+def plot_res(arr, base, finalcount):
     xaxe = np.arange(len(arr))
     fig, (x1, x2) = plt.subplots(2)
     x1.bar(xaxe, arr)
-    x1.axis([-1, len(arr), 0, max(arr) + 2])
+    x1.axis([-1, len(arr), 0, max(arr) + 4])
     x1.bar(xaxe, base, bottom=arr, color="red")
     x2.bar(xaxe, arr)
-    x2.axis([-1, len(arr), 0, max(arr) + 2])
+    x2.axis([-1, len(arr), 0, max(arr) + 4])
+    x1.set_title("Total count = " +  str(finalcount), pad=10)
     plt.show()
 
 
