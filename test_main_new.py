@@ -1,5 +1,5 @@
 import unittest
-import main
+import main_new as main
 
 
 class MyTest(unittest.TestCase):
@@ -20,7 +20,7 @@ class MyTest(unittest.TestCase):
 
     def test_null(self):
         arr = None
-        self.assertEqual(main.count(arr), None)
+        self.assertEqual(main.count(arr), 0)
 
     def test_backwards(self):
         arr = [3, 1, 7]
@@ -45,4 +45,5 @@ class MyTest(unittest.TestCase):
         self.assertEqual(main.count(arr3), 36)
 
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
